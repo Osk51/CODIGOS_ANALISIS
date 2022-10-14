@@ -1,0 +1,33 @@
+import serial
+import time
+import json
+import pickle
+import matplotlib.pyplot as plt
+import numpy
+
+
+with open('DatosSensor4.json', 'rb') as f:
+    datos = pickle.load(f)
+
+xAxis = list()
+yAxis = list()
+
+for elemento in datos:
+    if(elemento['Sensor'] == 'Luz'):
+        xAxis.append(elemento['Timestamp'])
+        yAxis.append(elemento['Valor'])
+
+
+plt.plot(xAxis,yAxis, color='blue', marker='.')
+plt.xlabel('Timestamp')
+plt.ylabel('Valor de la Luz')
+plt.grid(True)
+plt.show()
+
+print("Máximo: ")
+print(max(yAxis))
+
+print("Mínimo: ")
+print(min(yAxis))
+
+numpy.mean(yAxis)
