@@ -1,0 +1,33 @@
+long SensorLuz;
+const int LED = 3;
+int valorMapeado = 0;
+
+void setup() {
+  // put your setup code here, to run once:
+    pinMode (LED, OUTPUT);
+    Serial.begin(9600);
+    
+}
+void loop() {
+
+ 
+
+  
+  // put your main code here, to run repeatedly:
+    SensorLuz = analogRead(A0);
+    valorMapeado = map(SensorLuz,900,640,0,255);
+    analogWrite(LED,valorMapeado);
+  
+ 
+    Serial.print("{\"Sensor\":\"Luz\",\"Valor\":");
+    Serial.print(SensorLuz);
+    Serial.print(",\"Timestamp\":");
+    Serial.print(millis());
+    Serial.println("}");
+
+  
+
+    
+  
+  delay(60000);
+}
